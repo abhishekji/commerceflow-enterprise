@@ -1,0 +1,23 @@
+:root {
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: #e6e7e8;
+  background: #17191a;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --page: #17191a;
+  --sidebar: #202426;
+  --panel: #1d1f20;
+  --border: #292c2e;
+  --muted: #85898c;
+  --yellow: #d8ae25;
+  --green: #50b88a;
+}
+
+.light-theme {
+  --page: #f2f4f5;
+  --sidebar: #e7eaeb;
+  --panel: #fff;
+  --border: #d7dbdd;
+  color: #242729;
+}

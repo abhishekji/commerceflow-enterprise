@@ -1,0 +1,35 @@
+.dashboard-error {
+  border: 1px solid #75414a;
+  border-radius: 7px;
+  background: #38272b;
+  color: #f0aab4;
+}
+
+.dashboard-error {
+  margin-bottom: 14px;
+  padding: 11px 14px;
+  font-size: 12px;
+}
+
+.success-message,
+.page-message {
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.success-message {
+  background: #1f3f31;
+  color: var(--green);
+}
+
+.page-message.dashboard-error {
+  margin-bottom: 12px;
+}
+
+.empty-state {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 0;
+}

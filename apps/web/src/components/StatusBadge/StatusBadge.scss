@@ -1,0 +1,58 @@
+.badge {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  background: #3a3d3f;
+}
+
+.badge-pending {
+  background: #5a4a14;
+  color: #f0cf68;
+}
+
+.badge-confirmed {
+  background: #1f4a63;
+  color: #7cc4ec;
+}
+
+.badge-fulfilling {
+  background: #4a3a63;
+  color: #c3a6ef;
+}
+
+.badge-shipped {
+  background: #1f5a5a;
+  color: #7fdad6;
+}
+
+.badge-delivered {
+  background: #1f5a3f;
+  color: #7fdfae;
+}
+
+.badge-cancelled {
+  background: #5a2523;
+  color: #ef8f8a;
+}
+
+.badge-pay-unpaid {
+  background: #5a4a14;
+  color: #f0cf68;
+}
+
+.badge-pay-paid {
+  background: #1f5a3f;
+  color: #7fdfae;
+}
+
+.badge-pay-cod {
+  background: #1f4a63;
+  color: #7cc4ec;
+}
+
+.badge-pay-refunded {
+  background: #4a3a63;
+  color: #c3a6ef;
+}

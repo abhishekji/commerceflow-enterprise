@@ -1,0 +1,267 @@
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 5;
+  display: flex;
+  width: 242px;
+  flex-direction: column;
+  background: var(--sidebar);
+  border-right: 1px solid #2b2e30;
+  transition: transform .2s ease;
+}
+
+.brand {
+  height: 74px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 39px;
+  border-bottom: 1px solid #2c3031;
+  color: #f1f2f2;
+}
+
+.brand-wordmark {
+  display: flex;
+  flex-direction: column;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.brand-wordmark strong {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.brand-wordmark span {
+  font-size: 8px;
+  letter-spacing: 3.25px;
+  margin-top: 4px;
+}
+
+.navigation {
+  overflow-y: auto;
+  padding: 14px 8px 14px;
+}
+
+.nav-group {
+  margin-bottom: 10px;
+}
+
+.nav-heading {
+  margin: 0 7px 8px;
+  color: #84888a;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.nav-group:not(:first-child) .nav-heading {
+  margin-top: 10px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: .35px;
+}
+
+.nav-link,
+.return-button {
+  width: 100%;
+  height: 31px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 6px;
+  padding: 0 9px;
+  background: transparent;
+  color: #d0d2d3;
+  text-align: left;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  background: #282c2e;
+}
+
+.nav-link.active {
+  background: #2a2e30;
+  color: #f2f3f4;
+}
+
+.nav-link span {
+  white-space: nowrap;
+}
+
+.return-button {
+  height: 41px;
+  margin: 0 0 8px;
+  border: 1px solid #5e4d1a;
+  background: #302d22;
+  color: #d2ae36;
+  font-weight: 600;
+}
+
+.return-button:hover {
+  background: #3a3525;
+}
+
+.nav-badge {
+  margin-left: auto;
+  border-radius: 12px;
+  padding: 2px 6px;
+  background: #dc4960;
+  color: #fff;
+  font-size: 10px;
+}
+
+.account-button {
+  height: 72px;
+  margin-top: auto;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 0;
+  border-top: 1px solid #2c3031;
+  background: transparent;
+  text-align: left;
+}
+
+.logout-button {
+  height: 44px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 0;
+  border-top: 1px solid #2c3031;
+  background: transparent;
+  color: #c4c7c8;
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  color: var(--yellow);
+}
+
+.logout-button:disabled {
+  opacity: .65;
+  cursor: wait;
+}
+
+.account-avatar {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #2d3234;
+  color: #b8bbbc;
+  font-size: 10px;
+}
+
+.account-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.account-copy strong {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.account-copy small {
+  color: #919598;
+  font-size: 10px;
+}
+
+.account-button > svg {
+  color: #a1a4a6;
+}
+
+.light-theme .sidebar,
+.light-theme .brand {
+  border-color: #d5d9db;
+}
+
+.light-theme .brand {
+  color: #242729;
+}
+
+.light-theme .account-button {
+  border-color: #e2e4e5;
+}
+
+.light-theme .nav-link,
+.light-theme .account-copy strong {
+  color: #394044;
+}
+
+body.sidebar-collapsed .sidebar {
+  transform: translateX(-100%);
+}
+
+@media (max-width: 1100px) {
+  .sidebar {
+    width: 215px;
+  }
+}
+
+@media (max-width: 800px) {
+  .sidebar {
+    width: 68px;
+  }
+
+  .brand {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .brand-wordmark,
+  .nav-heading,
+  .nav-link span,
+  .nav-badge,
+  .account-copy,
+  .account-button > svg {
+    display: none;
+  }
+
+  .navigation {
+    padding: 14px 8px;
+  }
+
+  .nav-link {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .return-button {
+    justify-content: center;
+    padding: 0;
+    font-size: 0;
+  }
+
+  .account-button {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .logout-button {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .logout-button span {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .sidebar {
+    width: 54px;
+  }
+}

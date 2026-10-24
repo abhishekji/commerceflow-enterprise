@@ -1,0 +1,242 @@
+.delivery-card {
+  min-height: 466px;
+  padding: 24px 7px 17px;
+  text-align: center;
+}
+
+.delivery-heading {
+  display: grid;
+  justify-items: center;
+}
+
+.delivery-truck {
+  color: var(--yellow);
+  margin-bottom: 8px;
+}
+
+.delivery-heading h2 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.delivery-heading small {
+  margin-top: 1px;
+  color: #a0a3a5;
+  font-size: 10px;
+}
+
+.courier-select {
+  width: 123px;
+  height: 27px;
+  margin: 18px auto 11px;
+  padding: 0 8px;
+  text-align: left;
+}
+
+.courier-select select {
+  font-size: 11px;
+}
+
+.delivery-ring {
+  width: 166px;
+  height: 166px;
+  max-width: 100%;
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: conic-gradient(var(--green) 0deg 360deg);
+  position: relative;
+}
+
+.delivery-ring::before {
+  position: absolute;
+  content: "";
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--panel);
+}
+
+.delivery-ring > div {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.delivery-ring strong {
+  font-size: 26px;
+  line-height: 1.05;
+}
+
+.delivery-ring span {
+  margin-top: 3px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.delivery-ring small {
+  margin-top: 2px;
+  color: #999d9f;
+  font-size: 9px;
+}
+
+.delivery-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin: 5px 0 0;
+}
+
+.delivery-stats > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  margin-bottom: 6px;
+  border-radius: 50%;
+}
+
+.dot.green {
+  background: #50b88a;
+}
+
+.dot.yellow {
+  background: #f0bd16;
+}
+
+.delivery-stats strong {
+  font-size: 16px;
+  line-height: 1.1;
+}
+
+.delivery-stats span {
+  margin-top: 3px;
+  color: #b5b8b9;
+  font-size: 8px;
+}
+
+.delivery-stats small {
+  margin-top: 1px;
+  color: #50b88a;
+  font-size: 8px;
+}
+
+.delivery-total {
+  margin: 20px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid #303334;
+  color: #aeb1b2;
+  font-size: 9px;
+}
+
+.delivery-total strong {
+  color: #dedfe0;
+  font-weight: 600;
+}
+
+.light-theme .delivery-ring::before {
+  background: #fff;
+}
+
+@media (min-width: 1500px) {
+  .delivery-card {
+    min-height: 488px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .delivery-ring {
+    width: 145px;
+    height: 145px;
+  }
+
+  .delivery-ring::before {
+    width: 105px;
+    height: 105px;
+  }
+}
+
+@media (max-width: 800px) {
+  .delivery-card {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr 1.1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .courier-select {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0 auto;
+  }
+
+  .delivery-heading {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .delivery-ring {
+    width: 120px;
+    height: 120px;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  .delivery-ring::before {
+    width: 88px;
+    height: 88px;
+  }
+
+  .delivery-ring strong {
+    font-size: 20px;
+  }
+
+  .delivery-stats {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .delivery-total {
+    grid-column: 3;
+    grid-row: 2;
+    margin: 0;
+    padding-top: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .delivery-card {
+    grid-template-columns: .9fr 1fr 1fr;
+    gap: 5px;
+    padding: 10px 5px;
+  }
+
+  .delivery-ring {
+    width: 104px;
+    height: 104px;
+  }
+
+  .delivery-ring::before {
+    width: 76px;
+    height: 76px;
+  }
+
+  .delivery-stats strong {
+    font-size: 13px;
+  }
+
+  .delivery-stats span,
+  .delivery-stats small {
+    font-size: 7px;
+  }
+}

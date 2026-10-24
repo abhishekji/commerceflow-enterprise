@@ -1,0 +1,41 @@
+.notification-menu {
+  position: relative;
+}
+
+.notification-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 14px;
+  height: 14px;
+  padding: 0 3px;
+  border-radius: 999px;
+  background: #d9534f;
+  color: #fff;
+  font-size: 9px;
+  line-height: 14px;
+  text-align: center;
+}
+
+.notifications {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  z-index: 20;
+  width: 320px;
+  max-height: 380px;
+  overflow: auto;
+  padding: 10px;
+  list-style: none;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel);
+  box-shadow: 0 8px 24px #0006;
+  font-size: 12px;
+}
+
+.notifications li {
+  padding: 8px 4px;
+  border-bottom: 1px solid var(--border);
+}

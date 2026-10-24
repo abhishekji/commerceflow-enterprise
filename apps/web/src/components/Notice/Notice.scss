@@ -1,0 +1,24 @@
+.notice {
+  position: fixed;
+  top: 70px;
+  right: 25px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  max-width: calc(100vw - 30px);
+  padding: 12px 15px;
+  border: 1px solid #414548;
+  border-radius: 8px;
+  background: #272a2b;
+  box-shadow: 0 8px 24px #0005;
+  font-size: 12px;
+}
+
+.notice button {
+  border: 0;
+  background: transparent;
+  color: #c2c5c6;
+  font-size: 19px;
+  cursor: pointer;
+}

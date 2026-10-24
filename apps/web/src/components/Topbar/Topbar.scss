@@ -1,0 +1,97 @@
+.topbar {
+  height: 57px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 22px;
+  border-bottom: 1px solid #2a2c2d;
+  background: #191b1c;
+}
+
+.topbar-brand,
+.topbar-actions {
+  display: flex;
+  align-items: center;
+}
+
+.topbar-brand {
+  gap: 10px;
+  color: #d1d2d3;
+  font-size: 13px;
+}
+
+.company-icon {
+  color: #a4a8aa;
+  font-size: 17px;
+}
+
+.topbar-actions {
+  gap: 14px;
+}
+
+.collapse-button {
+  color: #d3d5d6;
+}
+
+.feedback-button {
+  height: 31px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 12px;
+  border: 1px solid #303335;
+  border-radius: 6px;
+  background: #1c1e1f;
+  color: #d1d2d3;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.feedback-button svg {
+  color: #d64b60;
+}
+
+.profile-button {
+  width: 27px;
+  height: 27px;
+  border: 0;
+  border-radius: 50%;
+  background: #2b2e30;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.profile-button {
+  display: grid;
+  place-items: center;
+  color: #e5e7e8;
+}
+
+.light-theme .topbar {
+  background: #fff;
+  border-color: #e0e3e5;
+}
+
+.light-theme .topbar-brand {
+  color: #242729;
+}
+
+@media (max-width: 560px) {
+  .topbar {
+    padding: 0 12px;
+  }
+
+  .topbar-actions {
+    gap: 5px;
+  }
+
+  .feedback-button {
+    padding: 0 8px;
+    font-size: 0;
+  }
+
+  .feedback-button svg {
+    width: 17px;
+    height: 17px;
+  }
+}

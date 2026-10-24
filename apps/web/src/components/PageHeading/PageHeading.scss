@@ -1,0 +1,103 @@
+.page-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+
+.page-heading > div:first-child {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.page-heading h1 {
+  margin: 0;
+  color: #f0f1f2;
+  font-size: 22px;
+  letter-spacing: -.45px;
+}
+
+.page-heading p {
+  margin: 0;
+  color: #a9acae;
+  font-size: 12px;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+}
+
+.select-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 31px;
+  padding: 0 9px;
+  border: 1px solid #303335;
+  border-radius: 6px;
+  background: #1b1d1e;
+  color: #c9cbcc;
+}
+
+.select-wrap select {
+  width: 100%;
+  appearance: none;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.select-wrap option {
+  background: #202426;
+  color: #e6e7e8;
+}
+
+.select-wrap > svg:last-child {
+  pointer-events: none;
+}
+
+.filters .select-wrap {
+  width: 150px;
+}
+
+.filters .select-wrap:nth-child(2) {
+  width: 119px;
+}
+
+.light-theme .page-heading h1 {
+  color: #242729;
+}
+
+.light-theme .select-wrap {
+  border-color: #dfe2e4;
+}
+
+@media (max-width: 560px) {
+  .page-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 17px;
+  }
+
+  .page-heading > div:first-child {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .filters {
+    width: 100%;
+  }
+
+  .filters .select-wrap {
+    flex: 1;
+    width: auto;
+  }
+}

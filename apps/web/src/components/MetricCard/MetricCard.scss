@@ -1,0 +1,90 @@
+.metric-card {
+  border: 1px solid #292c2e;
+  border-radius: 12px;
+  background: var(--panel);
+}
+
+.metric-card {
+  height: 91px;
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 12px 13px;
+}
+
+.metric-icon {
+  width: 19px;
+  height: 21px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 19px;
+  margin-top: 1px;
+  border-radius: 4px;
+  background: #262829;
+  color: var(--yellow);
+}
+
+.metric-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-label {
+  overflow: hidden;
+  margin: 0 0 5px;
+  color: #a4a8aa;
+  font-size: 9px;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.metric-copy strong {
+  font-size: 21px;
+  line-height: 1.05;
+  letter-spacing: -.25px;
+}
+
+.metric-copy > span {
+  overflow: hidden;
+  margin-top: 9px;
+  color: #9a9ea0;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.light-theme .metric-card {
+  border-color: #dfe2e4;
+}
+
+@media (max-width: 1100px) {
+  .metric-card {
+    gap: 7px;
+    padding: 11px 9px;
+  }
+
+  .metric-copy strong {
+    font-size: 18px;
+  }
+
+  .metric-copy > span {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 560px) {
+  .metric-card {
+    height: 83px;
+  }
+
+  .metric-copy strong {
+    font-size: 17px;
+  }
+
+  .metric-label {
+    font-size: 8px;
+  }
+}
