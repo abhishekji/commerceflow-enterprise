@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Notice } from "../../components/Notice";
+import { ChatAssistant } from "../../components/ChatAssistant";
 import { Sidebar } from "../../components/Sidebar";
 import { Topbar } from "../../components/Topbar";
 import "./AppLayout.scss";
@@ -15,6 +16,7 @@ export function AppLayout() {
           <Outlet />
         </div>
       </main>
+      <ChatAssistant />
     </div>
   );
 }

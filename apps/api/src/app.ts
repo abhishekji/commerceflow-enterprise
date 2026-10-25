@@ -11,6 +11,7 @@ import { orderRouter } from "./modules/orders/order.routes.js";
 import { catalogRouter } from "./modules/catalog/catalog.routes.js";
 import { notificationRouter } from "./modules/notifications/notification.routes.js";
 import { paymentRouter } from "./modules/payments/payment.routes.js";
+import { aiRouter } from "./modules/ai/ai.routes.js";
 import { errorHandler } from "./middleware/error-handler.js";
 import { requestId } from "./middleware/request-id.js";
 import { env } from "./config/env.js";
@@ -37,5 +38,6 @@ app.use("/api/v1/orders", orderRouter);
 app.use("/api/v1/catalog", catalogRouter);
 app.use("/api/v1/notifications", notificationRouter);
 app.use("/api/v1/payments", paymentRouter);
+app.use("/api/v1/ai", aiRouter);
 
 app.use(errorHandler);

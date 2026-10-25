@@ -19,6 +19,7 @@ describe("OpenAPI document", () => {
 
   it("documents every public route", () => {
     expect(Object.keys(doc.paths).sort()).toEqual([
+      "/ai/chat", "/ai/insights",
       "/auth/login", "/auth/logout", "/auth/me", "/auth/register",
       "/catalog/inventory", "/catalog/products", "/catalog/warehouses",
       "/dashboard/filters", "/dashboard/summary", "/dashboard/timeseries",

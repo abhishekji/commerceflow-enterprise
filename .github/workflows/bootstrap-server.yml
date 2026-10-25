@@ -1,0 +1,83 @@
+name: Bootstrap Server
+
+# One-time (re-runnable) setup of an EC2 instance: installs Docker, AWS CLI, firewall,
+# and copies deploy/<role>/ into /opt/commerceflow-<role>/ via SSM. No SSH needed.
+on:
+  workflow_dispatch:
+    inputs:
+      role:
+        description: Server role to bootstrap
+        type: choice
+        options: [backend, frontend]
+        required: true
+      vpc_cidr:
+        description: VPC CIDR allowed to reach the backend on port 3000
+        default: 10.0.0.0/16
+        required: true
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    env:
+      ROLE: ${{ inputs.role }}
+      VPC_CIDR: ${{ inputs.vpc_cidr }}
+      INSTANCE_ID: ${{ inputs.role == 'backend' && vars.BE_INSTANCE_ID || vars.FE_INSTANCE_ID }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Bootstrap instance using SSM
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BUNDLE=$(tar czf - "deploy/$ROLE" deploy/scripts | base64 -w0)
+          DIR="/opt/commerceflow-$ROLE"
+
+          REMOTE_COMMAND="set -e; rm -rf /tmp/cf-bootstrap; mkdir -p /tmp/cf-bootstrap $DIR; echo '$BUNDLE' | base64 -d | tar xz -C /tmp/cf-bootstrap; bash /tmp/cf-bootstrap/deploy/scripts/setup-server.sh $ROLE $VPC_CIDR ubuntu; cp -a /tmp/cf-bootstrap/deploy/$ROLE/. $DIR/; [ -f $DIR/.env ] || cp $DIR/.env.example $DIR/.env; chmod 600 $DIR/.env; chown -R ubuntu:ubuntu $DIR; rm -rf /tmp/cf-bootstrap; ls -la $DIR"
+
+          PARAMS=$(jq -cn --arg cmd "$REMOTE_COMMAND" '{commands: [$cmd], executionTimeout: ["1200"]}')
+
+          COMMAND_ID=$(aws ssm send-command \
+            --instance-ids "$INSTANCE_ID" \
+            --document-name "AWS-RunShellScript" \
+            --parameters "$PARAMS" \
+            --query "Command.CommandId" \
+            --output text)
+
+          for i in {1..120}; do
+            STATUS=$(aws ssm get-command-invocation \
+              --command-id "$COMMAND_ID" \
+              --instance-id "$INSTANCE_ID" \
+              --query "Status" \
+              --output text 2>/dev/null || echo "Pending")
+
+            echo "Bootstrap status: $STATUS"
+
+            case "$STATUS" in
+              Success)
+                aws ssm get-command-invocation --command-id "$COMMAND_ID" --instance-id "$INSTANCE_ID" \
+                  --query "StandardOutputContent" --output text | tail -n 25
+                exit 0
+                ;;
+              Failed|Cancelled|TimedOut)
+                aws ssm get-command-invocation --command-id "$COMMAND_ID" --instance-id "$INSTANCE_ID" || true
+                exit 1
+                ;;
+            esac
+
+            sleep 10
+          done
+
+          echo "Timed out waiting for bootstrap"
+          exit 1

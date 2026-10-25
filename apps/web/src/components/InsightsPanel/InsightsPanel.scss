@@ -1,0 +1,34 @@
+.insights-panel {
+  margin-top: 16px;
+  padding: 0 15px 15px;
+}
+
+.insights-header {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  svg { color: var(--yellow); }
+}
+
+.insights-body,
+.insights-empty,
+.insights-error {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.insights-body { white-space: pre-wrap; }
+.insights-empty { color: var(--muted); }
+.insights-error { color: #e07b76; }

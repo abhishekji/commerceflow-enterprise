@@ -22,6 +22,9 @@ export const ERROR_MESSAGES: Partial<Record<string, string>> = {
   [ApiErrorCode.Forbidden]: "You don't have permission to do that.",
   [ApiErrorCode.ValidationError]: "Check the details you entered and try again.",
   [ApiErrorCode.Unauthenticated]: "Your session expired. Sign in again.",
+  [ApiErrorCode.AiNotConfigured]: "The AI assistant isn't configured on this server yet.",
+  [ApiErrorCode.AiRateLimited]: "You're sending requests too quickly. Wait a moment and try again.",
+  [ApiErrorCode.AiUpstreamError]: "The AI service is unavailable right now. Try again shortly.",
 };
 
 export const AUTH_MESSAGES = {

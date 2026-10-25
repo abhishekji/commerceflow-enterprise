@@ -15,6 +15,8 @@ const envSchema = z.object({
   WORKERS_ENABLED: z.enum(["true", "false"]).default("true").transform((value) => value === "true"),
   SWAGGER_ENABLED: z.enum(["true", "false"]).optional().transform((value) => value === undefined ? undefined : value === "true"),
   LOG_LEVEL: z.enum(["fatal", "error", "warn", "info", "debug", "trace", "silent"]).default("info"),
+  OPENAI_API_KEY: z.string().min(1).optional(),
+  OPENAI_MODEL: z.string().min(1).default("gpt-4o-mini"),
 });
 
 const parsed = envSchema.parse(process.env);

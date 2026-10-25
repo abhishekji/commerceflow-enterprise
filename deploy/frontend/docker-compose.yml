@@ -1,0 +1,29 @@
+services:
+  web:
+    image: ${WEB_IMAGE:?Set WEB_IMAGE in .env}
+    environment:
+      # Private IP (or internal DNS name) of the BACKEND server inside the VPC
+      API_UPSTREAM: http://${BACKEND_PRIVATE_IP:?Set BACKEND_PRIVATE_IP in .env}:3000
+    expose:
+      - "80"
+    restart: unless-stopped
+
+  # Only public entrypoint: terminates TLS (automatic Let's Encrypt when DOMAIN is a hostname).
+  proxy:
+    image: caddy:2-alpine
+    environment:
+      DOMAIN: ${DOMAIN:-:80}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - web
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:

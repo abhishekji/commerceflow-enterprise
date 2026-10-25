@@ -18,6 +18,8 @@ export const API_ENDPOINTS = {
   CATALOG_INVENTORY: "/catalog/inventory",
   ORDERS: "/orders",
   NOTIFICATIONS: "/notifications",
+  AI_CHAT: "/ai/chat",
+  AI_INSIGHTS: "/ai/insights",
   order: (orderId: string) => `/orders/${orderId}`,
   orderTransition: (orderId: string) => `/orders/${orderId}/transition`,
   orderPayment: (orderId: string) => `/payments/orders/${orderId}/pay`,

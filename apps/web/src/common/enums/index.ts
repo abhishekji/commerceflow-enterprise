@@ -64,6 +64,9 @@ export enum ApiErrorCode {
   AlreadyPaid = "ALREADY_PAID",
   OrderNotPayable = "ORDER_NOT_PAYABLE",
   PaymentRequired = "PAYMENT_REQUIRED",
+  AiNotConfigured = "AI_NOT_CONFIGURED",
+  AiRateLimited = "AI_RATE_LIMITED",
+  AiUpstreamError = "AI_UPSTREAM_ERROR",
 }
 
 export enum IconName {
@@ -92,6 +95,7 @@ export enum IconName {
   Chevron = "chevron",
   Down = "down",
   Feedback = "feedback",
+  Sparkle = "sparkle",
 }
 
 export enum AuthMode {

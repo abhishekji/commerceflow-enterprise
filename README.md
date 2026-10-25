@@ -17,6 +17,8 @@ scoped in MongoDB.
   integration jobs.
 - Self-service registration of a tenant and its first administrator, plus a
   restricted CLI for bootstrapping one from the command line.
+- Optional OpenAI-powered assistant: a floating chat (all roles) and AI
+  Insights on the dashboard (non-customers). See [AI assistant](#ai-assistant).
 
 Some dashboard metrics and navigation areas depend on courier, shipment,
 payment, store, or announcement data that is not modeled yet. Those metrics are
@@ -30,6 +32,7 @@ shown as unavailable rather than estimated. See
 - **Database:** MongoDB with Mongoose
 - **Validation:** Zod
 - **Authentication:** bcryptjs and JSON Web Tokens
+- **AI (optional):** OpenAI Chat Completions
 
 ## Requirements
 
@@ -126,6 +129,8 @@ shown as unavailable rather than estimated. See
 | `WORKERS_ENABLED` | No | Run the outbox publisher and event worker inside the API process. Defaults to `true`. |
 | `SWAGGER_ENABLED` | No | Serve Swagger UI. Defaults to `true` outside production and `false` in production. |
 | `LOG_LEVEL` | No | pino log level; defaults to `info` (tests use `silent`). |
+| `OPENAI_API_KEY` | No | Enables the AI assistant. When unset, `/ai/*` endpoints return `503 AI_NOT_CONFIGURED`. |
+| `OPENAI_MODEL` | No | Defaults to `gpt-4o-mini`. |
 
 The bootstrap CLI additionally requires `BOOTSTRAP_TENANT_NAME`,
 `BOOTSTRAP_TENANT_SLUG`, `BOOTSTRAP_ADMIN_EMAIL`,
@@ -227,11 +232,24 @@ All API routes are under `/api/v1`.
 | `GET` | `/notifications` | The signed-in user's latest notifications. |
 | `GET` | `/payments/methods` | Available (dummy) payment methods and sandbox test hints. |
 | `POST` | `/payments/orders/:id/pay` | Pay for the caller's own pending order using `CARD`, `UPI`, `NET_BANKING`, `WALLET` or `COD`. |
+| `POST` | `/ai/chat` | Ask the assistant a question (up to 20 messages); answers from the caller's tenant data. |
+| `POST` | `/ai/insights` | AI summary of dashboard metrics; optional `warehouseId` (non-customers). |
 
 Dashboard endpoints require an authenticated, active non-customer user. Order
 creation requires authentication and accepts a `warehouseId` and a non-empty
 `items` array containing `productId` and integer `quantity` values from 1 to
 100. Login and logout requests must originate from `WEB_ORIGIN`.
+
+### AI assistant
+
+Set `OPENAI_API_KEY` (and optionally `OPENAI_MODEL`) to enable it; without a key
+the app works normally and the UI shows a "not configured" message.
+
+- **Chat:** answers are grounded in the caller's own tenant (product catalog and stock; dashboard metrics only for non-customers). Nothing from other tenants is sent.
+- **Insights:** 3-5 bullet summary of the dashboard metrics for the selected warehouse.
+- Requests need a session and a trusted origin, and are limited to 15 per user per minute (in-memory, per API instance). Errors: `429 AI_RATE_LIMITED`, `502 AI_UPSTREAM_ERROR`, `503 AI_NOT_CONFIGURED`.
+- Tenant data is sent to OpenAI to produce answers; enable it only if that suits your data policy.
+- Code: `apps/api/src/modules/ai`, `ChatAssistant` and `InsightsPanel` components.
 
 ### Order-to-delivery flow
 

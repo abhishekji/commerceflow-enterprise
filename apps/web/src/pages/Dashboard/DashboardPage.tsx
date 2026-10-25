@@ -5,6 +5,7 @@ import type { DashboardFilters, DashboardSummary, DashboardTimeseries } from "..
 import { ActionPanel } from "../../components/ActionPanel";
 import { DeliveryCard } from "../../components/DeliveryCard";
 import { Icon } from "../../components/Icon";
+import { InsightsPanel } from "../../components/InsightsPanel";
 import { MetricCard } from "../../components/MetricCard";
 import { NewsPanel } from "../../components/NewsPanel";
 import { PageHeading } from "../../components/PageHeading";
@@ -94,6 +95,8 @@ export function DashboardPage() {
         </section>
         <NewsPanel />
       </div>
+
+      <InsightsPanel warehouseId={warehouseId} />
     </>
   );
 }

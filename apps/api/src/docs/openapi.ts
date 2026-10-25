@@ -51,6 +51,7 @@ export function buildOpenApiDocument(serverUrl = "/"): JsonObject {
       { name: "Payments" },
       { name: "Notifications" },
       { name: "Dashboard" },
+      { name: "AI" },
     ],
     paths: {
       "/health": {
@@ -333,6 +334,55 @@ export function buildOpenApiDocument(serverUrl = "/"): JsonObject {
             "400": errorResponse("Validation error"),
             "401": errorResponse("Unauthenticated"),
             "403": errorResponse("Forbidden"),
+          },
+        },
+      },
+      "/ai/chat": {
+        post: {
+          tags: ["AI"],
+          summary: "Ask the AI assistant a question grounded in the tenant's catalog and metrics",
+          security: secured,
+          requestBody: jsonBody({
+            type: "object",
+            required: ["messages"],
+            properties: {
+              messages: {
+                type: "array",
+                minItems: 1,
+                maxItems: 20,
+                description: "Conversation so far; the last message must be from the user",
+                items: {
+                  type: "object",
+                  required: ["role", "content"],
+                  properties: {
+                    role: { type: "string", enum: ["user", "assistant"] },
+                    content: { type: "string", maxLength: 2000 },
+                  },
+                },
+              },
+            },
+          }),
+          responses: {
+            "200": { description: "Assistant reply", content: json(dataEnvelope({ type: "object", properties: { reply: { type: "string" } } })) },
+            ...commonErrors,
+            "429": errorResponse("Rate limited"),
+            "502": errorResponse("OpenAI request failed"),
+            "503": errorResponse("OPENAI_API_KEY is not configured"),
+          },
+        },
+      },
+      "/ai/insights": {
+        post: {
+          tags: ["AI"],
+          summary: "AI-written highlights of the dashboard metrics (non-customers)",
+          security: secured,
+          requestBody: { content: json({ type: "object", properties: { warehouseId: objectId } }) },
+          responses: {
+            "200": { description: "Insights", content: json(dataEnvelope({ type: "object", properties: { insights: { type: "string" } } })) },
+            ...commonErrors,
+            "429": errorResponse("Rate limited"),
+            "502": errorResponse("OpenAI request failed"),
+            "503": errorResponse("OPENAI_API_KEY is not configured"),
           },
         },
       },
